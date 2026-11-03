@@ -54,7 +54,7 @@ class AggregateTests(unittest.TestCase):
             result = aggregate.aggregate(root)
             self.assertTrue(result["complete"])
             self.assertTrue(result["matches_observed_automated_coverage"])
-            self.assertEqual(result["decompile_failed_indices"], [16134, 16151])
+            self.assertEqual(result["decompile_failed_indices"], [16151])
             self.assertEqual(result["producer_claims"]["input_sha256"], aggregate.ANALYSIS_SHA256)
             self.assertEqual(result["producer_claims"]["tool"], "Ghidra 12.1.3")
             self.assertFalse(result["provenance_verified"])

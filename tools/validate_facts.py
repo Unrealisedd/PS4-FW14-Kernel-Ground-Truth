@@ -12,7 +12,7 @@ import verify_kpatch
 
 CAPTURE_SHA256 = "8b2fe4b1c1ef3504cbf871bea31b4fb6d36b83158fcabf58bd89fc2c872ca0a2"
 ANALYSIS_SHA256 = "b20a94820aef512490d6167497eb00f9eaa5c780814fe19361b4f00cb7713c3b"
-FACT_SCHEMA_SHA256 = "aabb69cb0bca527326e6f0920b9afcf36278c75379f4af91bc188a96593f92de"
+FACT_SCHEMA_SHA256 = "ee73985fd4c27d18f8b84aa1bca00e93ff959fdb66d2c75dd06bf3fb2df2a5dd"
 ANCHORS = {
     ("xfast_syscall", "0x1c0", "public_sdk_constant"),
     ("copyout", "0x2bd950", "local_read_only_anchor_check"),
@@ -68,9 +68,9 @@ def validate(facts: Any, kpatch: Any) -> None:
         raise ValueError("unexpected tool provenance")
     if facts["coverage"] != {
         "functions": 19809,
-        "automated_pseudocode": 19807,
-        "manual_instruction_exact_fallbacks": 2,
-        "manual_instruction_exact_fallback_indices": [16134, 16151],
+        "automated_pseudocode": 19808,
+        "manual_instruction_exact_fallbacks": 1,
+        "manual_instruction_exact_fallback_indices": [16151],
     }:
         raise ValueError("unexpected coverage constants")
     anchors = facts["anchors"]

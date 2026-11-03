@@ -16,9 +16,9 @@
   },
   "coverage": {
     "functions": 19809,
-    "automated_pseudocode": 19807,
-    "manual_instruction_exact_fallbacks": 2,
-    "manual_instruction_exact_fallback_indices": [16134, 16151]
+    "automated_pseudocode": 19808,
+    "manual_instruction_exact_fallbacks": 1,
+    "manual_instruction_exact_fallback_indices": [16151]
   },
   "anchors": [
     {

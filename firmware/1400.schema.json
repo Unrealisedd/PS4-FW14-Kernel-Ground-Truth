@@ -35,9 +35,9 @@
       "required": ["functions", "automated_pseudocode", "manual_instruction_exact_fallbacks", "manual_instruction_exact_fallback_indices"],
       "properties": {
         "functions": {"const": 19809},
-        "automated_pseudocode": {"const": 19807},
-        "manual_instruction_exact_fallbacks": {"const": 2},
-        "manual_instruction_exact_fallback_indices": {"const": [16134, 16151]}
+        "automated_pseudocode": {"const": 19808},
+        "manual_instruction_exact_fallbacks": {"const": 1},
+        "manual_instruction_exact_fallback_indices": {"const": [16151]}
       }
     },
     "anchors": {
