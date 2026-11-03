@@ -6,7 +6,7 @@ A complete original-source decompile is technically unrecoverable: optimized mac
 
 ## Verified ground truth
 
-- Exact private Ghidra 12.1.3 analysis: 19,809 functions; automated pseudocode for 19,807; instruction-exact private fallbacks at sorted indices 16,134 and 16,151.
+- Exact private Ghidra 12.1.3 analysis: 19,809 functions; automated pseudocode for 19,808 with the canonical 600-second timeout; one instruction-exact private fallback at sorted index 16,151.
 - Reviewed RVAs: `xfast_syscall=0x1c0`, `copyout=0x2bd950`, `prison0=0x111fa18`, `rootvnode=0x2136e90`.
 - Corrected `sysent` geometry: table `0x1102b70`, stride `0x30`, syscall 11 entry `0x1102d80`; provisional `0x110a760` is entry 661.
 - The exact post-HEN capture matches 37 of 39 public FW 14.00 replacement fields. The two differences are syscall 11's argument-count and call fields; this does not establish clean stock bytes.
