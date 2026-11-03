@@ -1,0 +1,342 @@
+{
+  "schema": "ps4-fw14-kpatch-replacements.v1",
+  "firmware": "14.00",
+  "source": {
+    "repository": "https://github.com/Al-Azif/ps4-exploit-kpatches",
+    "file": "1400.c",
+    "license": "AGPL-3.0-or-later",
+    "commit": "b9d961a4f4ea5328f6f40166390c2c4da426a500",
+    "commit_url": "https://github.com/Al-Azif/ps4-exploit-kpatches/blob/b9d961a4f4ea5328f6f40166390c2c4da426a500/1400.c"
+  },
+  "semantics": "Public replacement-byte map only; values are not stock-byte guards.",
+  "capture_observation": {
+    "capture_state": "post-HEN",
+    "replacement_fields_matching": 37,
+    "replacement_fields_total": 39,
+    "differences": [
+      "sysent[11].sy_narg",
+      "sysent[11].sy_call"
+    ],
+    "matching_special_field": "sysent[11].sy_thrcnt",
+    "caveat": "Clean stock bytes cannot be derived from this capture.",
+    "analysis_elf_sha256": "b20a94820aef512490d6167497eb00f9eaa5c780814fe19361b4f00cb7713c3b"
+  },
+  "sites": [
+    {
+      "rva": "0x1b7a43",
+      "replacement_hex": "eb04",
+      "group": "do_patch",
+      "id": "do_patch-01",
+      "name": "dlsym_skip_check_1",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1b7a53",
+      "replacement_hex": "eb04",
+      "group": "do_patch",
+      "id": "do_patch-02",
+      "name": "dlsym_skip_check_2",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1b7a73",
+      "replacement_hex": "90e9",
+      "group": "do_patch",
+      "id": "do_patch-03",
+      "name": "dlsym_nop_and_jump",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x628684",
+      "replacement_hex": "eb00",
+      "group": "do_patch",
+      "id": "do_patch-04",
+      "name": "veripatch_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0xacd",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-05",
+      "name": "bcopy_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x2bd79d",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-06",
+      "name": "bzero_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x2bd7e1",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-07",
+      "name": "pagezero_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x2bd85d",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-08",
+      "name": "memcpy_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x2bd8a1",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-09",
+      "name": "pagecopy_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x2bda4d",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-10",
+      "name": "copyin_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x2bdefd",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-11",
+      "name": "copyinstr_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x2bdfcd",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-12",
+      "name": "copystr_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x628f6f",
+      "replacement_hex": "eb00",
+      "group": "do_patch",
+      "id": "do_patch-13",
+      "name": "sysveri_suspend_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x490",
+      "replacement_hex": "00000000",
+      "group": "do_patch",
+      "id": "do_patch-14",
+      "name": "amd64_syscall_clear_invalid_flag",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x4c2",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-15",
+      "name": "amd64_syscall_force_dispatch_1",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x4b9",
+      "replacement_hex": "eb00",
+      "group": "do_patch",
+      "id": "do_patch-16",
+      "name": "amd64_syscall_force_dispatch_2",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x4b5",
+      "replacement_hex": "eb00",
+      "group": "do_patch",
+      "id": "do_patch-17",
+      "name": "amd64_syscall_force_dispatch_3",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x391fc6",
+      "replacement_hex": "eb",
+      "group": "do_patch",
+      "id": "do_patch-18",
+      "name": "sys_setuid_privilege_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x2fcb5c",
+      "replacement_hex": "eb04",
+      "group": "do_patch",
+      "id": "do_patch-19",
+      "name": "vm_map_protect_rwx_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1b7504",
+      "replacement_hex": "90e9",
+      "group": "do_patch",
+      "id": "do_patch-20",
+      "name": "sys_dynlib_load_prx_patch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1b7ab8",
+      "replacement_hex": "90e93c01",
+      "group": "do_patch",
+      "id": "do_patch-21",
+      "name": "sys_dynlib_dlsym_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x3be3c0",
+      "replacement_hex": "4831c0c3",
+      "group": "do_patch",
+      "id": "do_patch-22",
+      "name": "dynlib_helper_return_zero",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1faada",
+      "replacement_hex": "37",
+      "group": "do_patch",
+      "id": "do_patch-23",
+      "name": "sys_mmap_max_protection_1",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1faadd",
+      "replacement_hex": "37",
+      "group": "do_patch",
+      "id": "do_patch-24",
+      "name": "sys_mmap_max_protection_2",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1102d80",
+      "replacement_hex": "02000000",
+      "group": "do_patch",
+      "id": "do_patch-25",
+      "name": "sysent_11_sy_narg",
+      "expected_status": "other"
+    },
+    {
+      "rva": "0x1102d88",
+      "replacement_dynamic": {
+        "kind": "kernel_base_plus_rva",
+        "target_rva": "0x250be",
+        "width": 8
+      },
+      "group": "do_patch",
+      "id": "do_patch-26",
+      "name": "sysent_11_sy_call",
+      "expected_status": "other"
+    },
+    {
+      "rva": "0x1102dac",
+      "replacement_hex": "01000000",
+      "group": "do_patch",
+      "id": "do_patch-27",
+      "name": "sysent_11_sy_thrcnt",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x125791",
+      "replacement_hex": "eb48",
+      "group": "optional_aio",
+      "id": "optional_aio-01",
+      "name": "aio_plus_0x00_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1257d3",
+      "replacement_hex": "eb06",
+      "group": "optional_aio",
+      "id": "optional_aio-02",
+      "name": "aio_plus_0x42_branch",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1257db",
+      "replacement_hex": "4183bfa004000000",
+      "group": "optional_aio",
+      "id": "optional_aio-03",
+      "name": "aio_plus_0x4a_instruction",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1257e9",
+      "replacement_hex": "498b87d0040000",
+      "group": "optional_aio",
+      "id": "optional_aio-04",
+      "name": "aio_plus_0x58_instruction",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x1257f6",
+      "replacement_hex": "498bb7b0040000",
+      "group": "optional_aio",
+      "id": "optional_aio-05",
+      "name": "aio_plus_0x65_instruction",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x12580e",
+      "replacement_hex": "498b8740050000",
+      "group": "optional_aio",
+      "id": "optional_aio-06",
+      "name": "aio_plus_0x7d_instruction",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x12581b",
+      "replacement_hex": "498bb720050000",
+      "group": "optional_aio",
+      "id": "optional_aio-07",
+      "name": "aio_plus_0x8a_instruction",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x125833",
+      "replacement_hex": "498dbfc0000000",
+      "group": "optional_aio",
+      "id": "optional_aio-08",
+      "name": "aio_plus_0xa2_instruction",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x12583f",
+      "replacement_hex": "498dbfe0000000",
+      "group": "optional_aio",
+      "id": "optional_aio-09",
+      "name": "aio_plus_0xae_instruction",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x125852",
+      "replacement_hex": "498dbf00010000",
+      "group": "optional_aio",
+      "id": "optional_aio-10",
+      "name": "aio_plus_0xc1_instruction",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x12585e",
+      "replacement_hex": "498dbf20010000",
+      "group": "optional_aio",
+      "id": "optional_aio-11",
+      "name": "aio_plus_0xcd_instruction",
+      "expected_status": "replacement"
+    },
+    {
+      "rva": "0x12586f",
+      "replacement_hex": "498bff",
+      "group": "optional_aio",
+      "id": "optional_aio-12",
+      "name": "aio_plus_0xde_instruction",
+      "expected_status": "replacement"
+    }
+  ]
+}

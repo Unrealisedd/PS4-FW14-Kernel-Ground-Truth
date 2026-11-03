@@ -1,0 +1,29 @@
+{
+  "schema": "ps4-fw14-public-files.v1",
+  "files": [
+    ".github/workflows/verify.yml",
+    ".gitignore",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "docs/METHODOLOGY.md",
+    "docs/PUBLICATION_BOUNDARY.md",
+    "firmware/1400-kpatch.json",
+    "firmware/1400.json",
+    "firmware/1400.schema.json",
+    "ghidra_scripts/ExportPrivatePseudocode.java",
+    "public-files.json",
+    "tests/test_aggregate_private.py",
+    "tests/test_audit_public_tree.py",
+    "tests/test_hash_gate.py",
+    "tests/test_prepare_kernel_elf.py",
+    "tests/test_validate_facts.py",
+    "tests/test_verify_kpatch.py",
+    "tools/aggregate_private.py",
+    "tools/audit_public_tree.py",
+    "tools/hash_gate.py",
+    "tools/prepare_kernel_elf.py",
+    "tools/validate_facts.py",
+    "tools/verify_kpatch.py"
+  ]
+}

@@ -1,0 +1,29 @@
+# Methodology
+
+## Identity and preparation
+
+`hash_gate.py` reads without modifying its input and accepts only the exact 44,040,192-byte capture or prepared ELF fingerprint. `prepare_kernel_elf.py` is the canonical capture validator/preparer: it validates the exact metadata schema and ELF64/program-header bounds, copies into a new file atomically, maps captured memory offsets into loadable segments, and writes a private manifest. When the payload record was not retained, its metadata mode deterministically records the load base already present in the exact hash-gated capture; that compatibility record is not independent producer provenance. The prepared output must pass the second exact hash gate.
+
+The canonical prepared hash preserves the capture's original `p_align` values. A live KASLR base need not satisfy the original file-layout congruence at that alignment, so `kernel.analysis.elf` is an analysis container verified with Ghidra—not an executable or OS-loader input. Changing alignment now would create a different artifact and invalidate the recorded Ghidra Program hash.
+
+The capture is a KASLR-relocated live image, may contain HEN patches, and is not a canonical retail SELF. Addresses in private analysis are therefore not published as live virtual addresses.
+
+## Ghidra analysis
+
+Import the hash-gated analysis ELF into Ghidra 12.1.3 as x86-64 and complete auto-analysis. The exporter binds to Ghidra's nonblank imported-Program SHA-256, requires exactly 19,809 functions, sorts them by entry address, bounds every shard request and timeout, and records each decompile failure. It rejects linked/reparse output paths and paths inside the repository or Ghidra project. Before private bytes are written, the preparer/exporter create identity-checked private staging objects under a trusted output parent and preflight same-volume hard-link publication. The entire private work area is a required quiescent trust boundary: while a command runs, no other process may create, replace, rename, hard-link, mutate, or delete any capture, metadata file, output parent, output child, or staging child. Observed drift fails closed, but cross-platform pathname link/unlink APIs do not provide handle-atomic publication against a concurrent writer that already controls that directory.
+
+The observed analysis has 19,809 functions. With the canonical 600-second per-function timeout, automated pseudocode completed for 19,807; sorted function indices 16,134 and 16,151 required private instruction-exact manual fallbacks. Shorter timeouts can add transient failures and do not satisfy the pinned automated status vector. These are coverage facts, not a claim that decompilation reconstructs original source.
+
+## Aggregation and anchors
+
+The aggregator pins the 19,809-function count, analysis hash, Ghidra 12.1.3 producer claim, and exact observed automated status vector. It requires exact paired shard names and provenance preambles, decompresses every pseudocode partner, validates its function-marker sequence against TSV indices, detects missing or duplicate indices, and emits no names, addresses, signatures, strings, instructions, or pseudocode. It binds every shard pathname to the opened object and checks the shard-directory generation before and after aggregation; its no-clobber summary publication uses identity-checked hard links. The same quiescent private-work-area requirement applies. A shard preamble is a format constraint, not cryptographic producer attestation; the summary therefore keeps `provenance_verified` false. Anchor evidence is classified in `firmware/1400.json`: `public_sdk_constant` means independently public SDK-derived metadata; `local_read_only_anchor_check` means a private capture check reported only as a compact RVA without bytes or instructions.
+
+The two automated failures at sorted indices 16,134 and 16,151 were resolved in separate private, instruction-level review. The public aggregator requires the observed exporter failures at those exact indices and reports the expected private fallback indices, but it neither accepts a `manual_fallback` status from the automated exporter nor claims to verify fallback semantics. No fallback body is public.
+
+The public anchor baseline is [Scene-Collective `ps4-payload-sdk` `fw_defines.h` at commit `b732641`](https://github.com/Scene-Collective/ps4-payload-sdk/blob/b7326416c23ce14639e9180a24093bdc5eedb579/libPS4/include/fw_defines.h), which records the FW 14.00 `xfast_syscall`, `copyout`, `prison0`, and `rootvnode` constants. `copyout` is labeled `local_read_only_anchor_check` in the fact record because its entry bytes were also checked directly in the exact capture; the repository does not publish those bytes.
+
+## Public sysent and patch checks
+
+The verified `sysent` table RVA is `0x1102b70`, with `0x30`-byte entries; syscall 11 is therefore at `0x1102d80`. Al-Azif's public 14.00 patch source addresses that entry, and a local read-only check found coherent adjacent entries at that stride. The provisional public value `0x110a760` is entry 661 (`0x1102b70 + 661 * 0x30`), not the table base. No boot-specific VA or call pointer is published.
+
+`firmware/1400-kpatch.json` is an original data transcription of replacement values from [Al-Azif's `ps4-exploit-kpatches` 14.00 source at commit `b9d961a`](https://github.com/Al-Azif/ps4-exploit-kpatches/blob/b9d961a4f4ea5328f6f40166390c2c4da426a500/1400.c), attributed under AGPL-3.0-or-later. It does not copy source prose or code. `verify_kpatch.py` accepts only this canonical map, validates all 39 records before reading the image, then hash-gates and reads the analysis ELF. It reports only `replacement` or `other`; these values are replacement checks, **not stock-byte guards**. The post-HEN capture matched 37 of 39 fields. Syscall 11's argument count and call field had later HEN values, while its thread-count field matched. Clean stock bytes cannot be derived from this capture.

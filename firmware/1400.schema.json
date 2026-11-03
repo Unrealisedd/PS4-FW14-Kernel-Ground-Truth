@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PS4 firmware 14.00 analysis fact record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "firmware", "provenance", "capture_caveats", "tool", "coverage", "anchors", "sysent"],
+  "properties": {
+    "schema": {"const": "ps4-fw-kernel-ground-truth.v1"},
+    "firmware": {"const": "14.00"},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capture_size", "capture_sha256", "analysis_elf_sha256"],
+      "properties": {
+        "capture_size": {"const": 44040192},
+        "capture_sha256": {"const": "8b2fe4b1c1ef3504cbf871bea31b4fb6d36b83158fcabf58bd89fc2c872ca0a2"},
+        "analysis_elf_sha256": {"const": "b20a94820aef512490d6167497eb00f9eaa5c780814fe19361b4f00cb7713c3b"}
+      }
+    },
+    "capture_caveats": {
+      "const": [
+        "KASLR-relocated live image; not a canonical retail SELF",
+        "Capture may contain HEN patches"
+      ]
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {"name": {"const": "Ghidra"}, "version": {"const": "12.1.3"}}
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["functions", "automated_pseudocode", "manual_instruction_exact_fallbacks", "manual_instruction_exact_fallback_indices"],
+      "properties": {
+        "functions": {"const": 19809},
+        "automated_pseudocode": {"const": 19807},
+        "manual_instruction_exact_fallbacks": {"const": 2},
+        "manual_instruction_exact_fallback_indices": {"const": [16134, 16151]}
+      }
+    },
+    "anchors": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          {"const": {"name": "xfast_syscall", "rva": "0x1c0", "evidence": "public_sdk_constant"}},
+          {"const": {"name": "copyout", "rva": "0x2bd950", "evidence": "local_read_only_anchor_check"}},
+          {"const": {"name": "prison0", "rva": "0x111fa18", "evidence": "public_sdk_constant"}},
+          {"const": {"name": "rootvnode", "rva": "0x2136e90", "evidence": "public_sdk_constant"}}
+        ]
+      }
+    },
+    "sysent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["table_rva", "entry_stride", "syscall_11_entry_rva", "entry_661_rva", "evidence", "provisional_value_correction"],
+      "properties": {
+        "table_rva": {"const": "0x1102b70"},
+        "entry_stride": {"const": "0x30"},
+        "syscall_11_entry_rva": {"const": "0x1102d80"},
+        "entry_661_rva": {"const": "0x110a760"},
+        "evidence": {"const": ["Al-Azif public 1400.c addresses sysent[11] at RVA 0x1102d80", "The table RVA follows from 0x1102d80 - 11 * 0x30", "Exact-capture read-only checks found coherent adjacent entries at stride 0x30"]},
+        "provisional_value_correction": {"const": "0x110a760 is entry 661 (0x1102b70 + 661 * 0x30), not the table base"}
+      }
+    }
+  }
+}
